@@ -29,6 +29,7 @@ def bs_left(a, x):
             lo = mid+1
         else:
             hi = mid
+    return lo
 
 
 # bisect_right() in Python
@@ -44,3 +45,24 @@ def bs_right(a, x):
             lo = mid+1
         else:
             hi = mid
+    return lo
+
+
+# 用特定函數確認是否在有效範圍內
+# 依情況調整上界
+# 依函數邏輯調整排除條件
+# 排除條件不同，有時需改變中位數取向避免死循環
+def bs_with_function(a, x):
+
+    def isValid(val):
+        pass
+
+    lo = 0
+    hi = 10000000
+    while lo < hi:
+        mid = (lo+hi) << 1
+        if isValid(mid):
+            lo = mid
+        else:
+            hi = mid-1
+    return lo
