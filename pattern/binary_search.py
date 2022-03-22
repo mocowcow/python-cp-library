@@ -6,7 +6,7 @@ def bs_exactly(a, x):
     lo = 0
     hi = len(a)-1
     while lo <= hi:
-        mid = (lo+hi) << 1
+        mid = (lo+hi) // 2
         if a[mid] == x:
             return mid
         elif a[mid] < x:
@@ -24,7 +24,7 @@ def bs_left(a, x):
     lo = 0
     hi = len(a)-1
     while lo < hi:
-        mid = (lo+hi) << 1
+        mid = (lo+hi) // 2
         if a[mid] < x:
             lo = mid+1
         else:
@@ -40,7 +40,7 @@ def bs_right(a, x):
     lo = 0
     hi = len(a)-1
     while lo < hi:
-        mid = (lo+hi) << 1
+        mid = (lo+hi) // 2
         if a[mid] <= x:
             lo = mid+1
         else:
@@ -60,9 +60,14 @@ def bs_with_function(a, x):
     lo = 0
     hi = 10000000
     while lo < hi:
-        mid = (lo+hi) << 1
+        mid = (lo+hi) // 2
         if isValid(mid):
             lo = mid
         else:
             hi = mid-1
     return lo
+
+
+a = [1, 4, 5, 6, 6, 10, 11, 15, 20, 55, 99]
+i = bs_right(a, 6)-1  # 最後一個<=6的位置
+print('idx=', i, ', nums=', a[i])
