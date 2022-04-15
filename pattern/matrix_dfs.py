@@ -20,8 +20,8 @@ def matrix_dfs():
         for nr, nc in ((r+1, c), (r-1, c), (r, c+1), (r, c-1)):
             dfs(nr, nc)
 
-        # 依條件開始dfs
-        for i in range(M):
-            for j in range(N):
-                if i == 0 or j == 0 or i == M-1 or j == N-1:  # 開始條件
-                    dfs(i, j)
+    # 依條件開始dfs
+    for i in range(M):
+        for j in range(N):
+            if i == 0 or j == 0 or i == M-1 or j == N-1:  # 開始條件
+                dfs(i, j)
