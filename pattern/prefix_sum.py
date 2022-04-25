@@ -1,3 +1,5 @@
+from itertools import accumulate
+
 
 def prefix_sum(nums):
     N = len(nums)
@@ -5,6 +7,17 @@ def prefix_sum(nums):
     for i, n in enumerate(nums):
         psum[i+1] = psum[i]+n
     return psum
+
+
+def prefix_sum_with_append(nums):
+    psum = [0]
+    for n in nums:
+        psum.append(psum[-1]+n)
+    return psum
+
+
+def prefix_sum_with_accumulate(nums):
+    return [0]+list(accumulate(nums))
 
 
 psum = prefix_sum([1, 2, 3, 4, 6, 7, 10])
