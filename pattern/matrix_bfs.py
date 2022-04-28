@@ -25,7 +25,7 @@ def matrix_bfs(matrix):
     while q:
         t = []
         for r, c in q:
-            if not (0 <= r < N and 0 <= c < N) or matrix[r][c] != 0 or (r, c) in visited:  # 終止條件
+            if not (0 <= r < M and 0 <= c < N) or matrix[r][c] != 0 or (r, c) in visited:  # 終止條件
                 continue
             visited.add((r, c))
             # 中間處理
