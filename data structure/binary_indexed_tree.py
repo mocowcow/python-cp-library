@@ -2,7 +2,6 @@ from typing import List
 
 
 class BinaryIndexedTree:
-
     def __init__(self, n):
         self.bit = [0]*(n+1)
         self.N = len(self.bit)
@@ -23,7 +22,6 @@ class BinaryIndexedTree:
 
 
 class BinaryIndexedTreeWithList:
-
     def __init__(self, nums: List[int]):
         self.bit = [0]+nums  # restore range sum
         self.nums = nums  # original list

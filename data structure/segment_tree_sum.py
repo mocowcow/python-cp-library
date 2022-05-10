@@ -1,6 +1,5 @@
 
 class SegmentTree:
-
     def __init__(self, nums):
         self.N = len(nums)
         self.nums = nums
