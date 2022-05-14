@@ -52,6 +52,11 @@ def graph_as_mask(N):
         step += 1
 
 
-# 將第i個位元g設為0
+# 將第i個位元設為0
 def clearBit(mask, i):
     return mask & ~(1 << i)
+
+
+# 將第i個位元設為1
+def setBit(mask, i):
+    return mask | (1 << i)
