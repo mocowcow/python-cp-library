@@ -50,3 +50,8 @@ def graph_as_mask(N):
             # 往鄰接點bfs
             pass
         step += 1
+
+
+# 將第i個位元g設為0
+def clearBit(mask, i):
+    return mask & ~(1 << i)
