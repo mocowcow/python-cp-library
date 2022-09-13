@@ -1,5 +1,7 @@
 
 class Node:
+    __slots__ = ['L', 'R', 'used', 'left', 'right']
+
     def __init__(self, L, R, used):
         self.L = L
         self.R = R
