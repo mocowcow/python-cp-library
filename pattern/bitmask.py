@@ -60,3 +60,15 @@ def clearBit(mask, i):
 # 將第i個位元設為1
 def setBit(mask, i):
     return mask | (1 << i)
+
+
+# 檢查是否為2的次方數
+def isPowOf2(n):
+    if n == 0:
+        return False
+    return n & (n-1) == 0
+
+
+# 取得最低位的1位元
+def lowBit(n):
+    return n & -n  # n & (~n+1)
