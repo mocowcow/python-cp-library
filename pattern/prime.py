@@ -33,6 +33,6 @@ def prime_fact(n):
             fact.append(p)
             n //= p
         p += 1
-    if p != 1:
-        fact.append(p)
+    if n != 1:
+        fact.append(n)
     return fact
