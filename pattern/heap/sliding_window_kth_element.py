@@ -53,7 +53,7 @@ def SlidingWindowKthElement(nums: List[int], window_size: int, k: int) -> List[f
         if bal > 0:  # L>R, take largest one from L
             heappush(R, -heappop(L))
         elif bal < 0:  # L<R, take smallest one from R
-            heappush(L, heappop(R))
+            heappush(L, -heappop(R))
 
         # check if elements should be removed
         while L and lazy[-L[0]] > 0:
