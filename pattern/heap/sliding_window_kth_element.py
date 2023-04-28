@@ -19,8 +19,7 @@ def SlidingWindowKthElement(nums: List[int], window_size: int, k: int) -> List[f
         heappush(L, -nums[i])
     # only keep k elements in max heap L
     while len(L) > k:
-        t = -heappop(L)
-        heappush(R, t)
+        heappush(R, -heappop(L))
 
     ans.append(get_value())
 
@@ -52,19 +51,16 @@ def SlidingWindowKthElement(nums: List[int], window_size: int, k: int) -> List[f
 
         # make two heaps balanced
         if bal > 0:  # L>R, take largest one from L
-            t = -heappop(L)
-            heappush(R, t)
+            heappush(R, -heappop(L))
         elif bal < 0:  # L<R, take smallest one from R
-            t = heappop(R)
-            heappush(L, -t)
+            heappush(L, heappop(R))
 
         # check if elements should be removed
         while L and lazy[-L[0]] > 0:
-            lazy[-L[0]] -= 1
-            heappop(L)
+            lazy[-heappop(L)] -= 1
+
         while R and lazy[R[0]] > 0:
-            lazy[R[0]] -= 1
-            heappop(R)
+            lazy[heappop(R)] -= 1
 
         ans.append(get_value())
 
