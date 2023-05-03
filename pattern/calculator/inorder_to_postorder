@@ -1,10 +1,12 @@
-def parseExperssion(s):
+from typing import List
+
+
+def parse_experssion(s: str) -> List[str]:
     """
     過濾字串s空格，並分割數字、運算子，儲存成list
     輸入： s = "15 * ( 2+31)"
     輸出： exp = ['15', '*', '(', '2', '+', '31', ')']
     """
-
     exp = []
 
     for c in s:
@@ -18,13 +20,12 @@ def parseExperssion(s):
     return exp
 
 
-def inorderToPostorder(inorder):
+def inorder_to_postorder(inorder: List[str]) -> List[str]:
     """
     中序式轉後序式
     輸入： inorder = ['15', '*', '(', '2', '+', '31', ')']
     輸出： postorder = ['15', '2', '31', '+', '*']
     """
-
     priority = {
         "*": 2,
         "/": 2,
@@ -57,7 +58,7 @@ def inorderToPostorder(inorder):
     return postorder
 
 
-def calculatePostorder(postorder):
+def calculate_postorder(postorder: List[str]) -> int:
     """
     計算後序式結果
     輸入： postorder = ['15', '2', '31', '+', '*']
@@ -84,10 +85,10 @@ def calculatePostorder(postorder):
 
 
 s = "15 * ( 2+31)"
-
-IN = parseExperssion(s)
+print(s)
+IN = parse_experssion(s)
 print(IN)
-POST = inorderToPostorder(IN)
+POST = inorder_to_postorder(IN)
 print(POST)
-RES = calculatePostorder(POST)
+RES = calculate_postorder(POST)
 print(RES)
