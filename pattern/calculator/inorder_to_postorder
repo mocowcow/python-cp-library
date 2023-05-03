@@ -79,7 +79,7 @@ def calculate_postorder(postorder: List[str]) -> int:
         elif c == "*":
             st.append(a*b)
         elif c == "/":
-            st.append(int(a/b))
+            st.append(int(a/b))  # 向0取整
 
     return sum(st)
 
@@ -91,4 +91,4 @@ print(IN)
 POST = inorder_to_postorder(IN)
 print(POST)
 RES = calculate_postorder(POST)
-print(RES)
+print(RES)  # 495
