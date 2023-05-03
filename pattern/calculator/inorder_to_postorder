@@ -4,7 +4,7 @@ def parseExperssion(s):
     for c in s:
         if c == " ":
             continue
-        elif c.isdigit() and exp[-1].isdigit():
+        elif c.isdigit() and exp and exp[-1].isdigit():
             exp[-1] += c
         else:
             exp.append(c)
