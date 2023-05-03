@@ -36,23 +36,23 @@ def inorder_to_postorder(inorder: List[str]) -> List[str]:
     }
 
     postorder = []
-    st = []
+    st = []  # 只存運算子
 
     for c in inorder:
-        if c.isdigit():
+        if c.isdigit():  # 數字直接輸出
             postorder.append(c)
-        elif c == "(":
+        elif c == "(":  # 左括號直接入堆疊，之後搭配右括號使用
             st.append("(")
-        elif c == ")":
+        elif c == ")":  # 將左右括號範圍內的東西全部輸出
             while st[-1] != "(":
                 postorder.append(st.pop())
             st.pop()
-        else:
+        else:  # 將優先度高於等於當前運算子c的運算子全部輸出，最後才將c入堆疊
             while st and priority[c] <= priority[st[-1]]:
                 postorder.append(st.pop())
             st.append(c)
 
-    while st:
+    while st:  # 剩餘堆疊全部輸出
         postorder += st.pop()
 
     return postorder
