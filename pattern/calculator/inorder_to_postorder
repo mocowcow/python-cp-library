@@ -1,0 +1,77 @@
+def parseExperssion(s):
+    exp = []
+
+    for c in s:
+        if c == " ":
+            continue
+        elif c.isdigit() and exp[-1].isdigit():
+            exp[-1] += c
+        else:
+            exp.append(c)
+
+    return exp
+
+
+def inorderToPostorder(inorder):
+
+    priority = {
+        "*": 2,
+        "/": 2,
+        "+": 1,
+        "-": 1,
+        "(": 0,
+        ")": 0
+    }
+
+    postorder = []
+    st = []
+
+    for c in inorder:
+        if c.isdigit():
+            postorder.append(c)
+        elif c == "(":
+            st.append("(")
+        elif c == ")":
+            while st[-1] != "(":
+                postorder.append(st.pop())
+            st.pop()
+        else:
+            while st and priority[c] <= priority[st[-1]]:
+                postorder.append(st.pop())
+            st.append(c)
+
+    while st:
+        postorder += st.pop()
+
+    return postorder
+
+
+def calculatePostorder(postorder):
+    st = []
+
+    for c in postorder:
+        if c.isdigit():
+            st.append(int(c))
+            continue
+        b = st.pop()
+        a = st.pop()
+        if c == "+":
+            st.append(a+b)
+        elif c == "-":
+            st.append(a-b)
+        elif c == "*":
+            st.append(a*b)
+        elif c == "/":
+            st.append(int(a/b))
+
+    return sum(st)
+
+
+s = "(2+1)*(3+4)"
+
+IN = parseExperssion(s)
+print(IN)
+POST = inorderToPostorder(IN)
+print(POST)
+RES = calculatePostorder(POST)
+print(RES)
