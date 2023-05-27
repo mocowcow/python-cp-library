@@ -33,7 +33,7 @@ def build(id, L, R):
 # 區間查詢
 # 回傳[i, j]的總和
 def query(id, L, R, i, j):
-    if i <= L and R <= j:  # 查詢範圍被當前區間包含
+    if i <= L and R <= j:  # 當前區間目標範圍包含
         return tree[id]
     ans = 0
     M = (L+R)//2
@@ -47,7 +47,7 @@ def query(id, L, R, i, j):
 # 單點更新
 # 對索引i增加val
 def update(id, L, R, i, val):
-    if L == R:  # 查詢範圍被當前區間包含
+    if L == R:  # 當前區間目標範圍包含
         tree[id] += val
         return
     M = (L+R)//2
