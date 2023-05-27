@@ -13,7 +13,7 @@ def get_prime(n):
 
 
 # build prime table
-# sqrt(n) is enough for sieve
+# O(sqrt(n))
 def prime_table(n):
     sieve = [True]*(n+1)
     sieve[0] = sieve[1] = False
@@ -25,6 +25,7 @@ def prime_table(n):
 
 
 # prime factorization
+# O(sqrt(n))
 def prime_fact(n):
     fact = []
     p = 2
@@ -36,3 +37,14 @@ def prime_fact(n):
     if n != 1:
         fact.append(n)
     return fact
+
+
+# check is prime or not
+# O(sqrt(n))
+def is_prime(n):
+    if n == 1:
+        return False
+    for i in range(2, int(n**0.5)+1):
+        if n % i == 0:
+            return False
+    return True
