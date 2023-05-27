@@ -31,14 +31,16 @@ def lcm(a, b):
 
 
 # 多個數最小公因數
-def gcd_multi(*nums):
-    if len(nums) < 2:
-        raise Exception('size of nums cant be 1')
-    return reduce(gcd, nums)
+def gcd_multi(nums):
+    _gcd = 0
+    for x in nums:
+        _gcd = gcd(_gcd, x)
+    return _gcd
 
 
 # 多個數最小公倍數
-def lcm_multi(*nums):
-    if len(nums) < 2:
-        raise Exception('size of nums cant be 1')
-    return reduce(lcm, nums)
+def lcm_multi(nums):
+    _lcm = 1
+    for x in nums:
+        _lcm = _lcm*x//gcd(_lcm, x)
+    return _lcm
