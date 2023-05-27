@@ -1,5 +1,3 @@
-from functools import reduce
-
 
 # 1連加到n
 def sum1toN(n):
@@ -23,6 +21,14 @@ def gcd(a, b):
     if b == 0:
         return a
     return gcd(b, a % b)
+
+
+# 最大公因數
+# 迴圈版
+def gcd_iter(a, b):
+    while a > 0:
+        a, b = b % a, a
+    return b
 
 
 # 最小公倍數
