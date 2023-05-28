@@ -33,8 +33,8 @@ def build(id, L, R):
 # 區間查詢
 # 回傳[i, j]的總和
 def query(id, L, R, i, j):
-    if i <= L and R <= j:  # 當前區間目標範圍包含
-        return tree[id]+lazy[id]*(R-L+1)  # 答案記得加上懶標
+    if i <= L and R <= j:  # 當前區間被目標範圍包含
+        return tree[id]
     push_down(id, L, R)
     ans = 0
     M = (L+R)//2
@@ -48,8 +48,9 @@ def query(id, L, R, i, j):
 # 區間更新
 # 對[i, j]每個索引都增加val
 def update(id, L, R, i, j, val):
-    if i <= L and R <= j:  # 當前區間目標範圍包含
-        lazy[id] += val  # 直接標記每個位置都加val
+    if i <= L and R <= j:  # 當前區間被目標範圍包含
+        tree[id] += (R-L+1)*val
+        lazy[id] += val  # 標記每個位置都加val
         return
     push_down(id, L, R)
     M = (L+R)//2
@@ -63,10 +64,12 @@ def update(id, L, R, i, j, val):
 # 將區間懶標加到答案中
 # 下推懶標記給左右子樹
 def push_down(id, L, R):
+    M = (L+R)//2
     if lazy[id]:
         lazy[id*2] += lazy[id]
+        tree[id*2] += lazy[id]*(M-L+1)
         lazy[id*2+1] += lazy[id]
-        tree[id] += lazy[id]*(R-L+1)
+        tree[id*2+1] += lazy[id]*(R-(M+1)+1)
         lazy[id] = 0
 
 
@@ -105,3 +108,6 @@ print(query(1, 0, N-1, 1, 1))  # 5
 print(query(1, 0, N-1, 2, 2))  # 3
 print(query(1, 0, N-1, 3, 3))  # 0
 print(query(1, 0, N-1, 4, 4))  # 3
+print(query(1, 0, N-1, 0, 2))  # 16
+print(query(1, 0, N-1, 2, 3))  # 3
+print(query(1, 0, N-1, 2, 4))  # 6
