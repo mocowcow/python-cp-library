@@ -26,7 +26,7 @@ def dijkstra_bruteforce(g, n, src):
 
 
 # heap optimized dijkstra
-# O(V + E log E)
+# O(E log E)
 def dijkstra(g, n, src):
     dis = [inf]*(n)
     dis[src] = 0
