@@ -1,8 +1,8 @@
 
 # n Choose k
 # Pascal's triangle
-# C(n,k)
-# with MOD 10^9+7
+# C(n,k) with MOD 10^9+7
+# O(n^2)
 def conbination_table(n):
     MOD = 10**9+7
     C = [[0]*(n+1) for _ in range(n+1)]
