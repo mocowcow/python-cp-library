@@ -3,7 +3,7 @@
 # Pascal's triangle
 # C(n,k) with MOD 10^9+7
 # O(n^2)
-def conbination_table(n):
+def combination_table(n):
     MOD = 10**9+7
     C = [[0]*(n+1) for _ in range(n+1)]
     C[0][0] = 1
@@ -14,7 +14,7 @@ def conbination_table(n):
     return C
 
 
-print(conbination_table(3))
+print(combination_table(3))
 # [[1, 0, 0, 0],
 #  [1, 1, 0, 0],
 #  [1, 2, 1, 0],
