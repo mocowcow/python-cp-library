@@ -18,9 +18,11 @@ update(1, 0, N-1, i, val)
 """
 
 
-# 初始化線段樹
-# 若無初始值則不需執行
 def build(id, L, R):
+    """
+    初始化線段樹
+    若無初始值則不需執行
+    """
     if L == R:  # 到達葉節點
         tree[id] = init[L]
         return
@@ -30,9 +32,11 @@ def build(id, L, R):
     tree[id] = tree[id*2]+tree[id*2+1]  # 以左右子樹更新答案
 
 
-# 區間查詢
-# 回傳[i, j]的總和
 def query(id, L, R, i, j):
+    """
+    區間查詢
+    回傳[i, j]的總和
+    """
     if i <= L and R <= j:  # 當前區間目標範圍包含
         return tree[id]
     ans = 0
@@ -44,9 +48,11 @@ def query(id, L, R, i, j):
     return ans
 
 
-# 單點更新
-# 對索引i增加val
 def update(id, L, R, i, val):
+    """
+    單點更新
+    對索引i增加val
+    """
     if L == R:  # 當前區間目標範圍包含
         tree[id] += val
         return
