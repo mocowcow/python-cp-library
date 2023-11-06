@@ -18,9 +18,11 @@ update(1, 0, N-1, i, j, val)
 """
 
 
-# 初始化線段樹
-# 若無初始值則不需執行
 def build(id, L, R):
+    """
+    初始化線段樹
+    若無初始值則不需執行
+    """
     if L == R:  # 到達葉節點
         tree[id] = init[L]
         return
@@ -30,9 +32,11 @@ def build(id, L, R):
     tree[id] = tree[id*2]+tree[id*2+1]  # 以左右子樹更新答案
 
 
-# 區間查詢
-# 回傳[i, j]的總和
 def query(id, L, R, i, j):
+    """
+    區間查詢
+    回傳[i, j]的總和
+    """
     if i <= L and R <= j:  # 當前區間被目標範圍包含
         return tree[id]
     push_down(id, L, R)
@@ -45,9 +49,11 @@ def query(id, L, R, i, j):
     return ans
 
 
-# 區間更新
-# 對[i, j]每個索引都增加val
 def update(id, L, R, i, j, val):
+    """
+    區間更新
+    對[i, j]每個索引都增加val
+    """
     if i <= L and R <= j:  # 當前區間被目標範圍包含
         tree[id] += (R-L+1)*val
         lazy[id] += val  # 標記每個位置都加val
@@ -61,9 +67,11 @@ def update(id, L, R, i, j, val):
     push_up(id)
 
 
-# 將區間懶標加到答案中
-# 下推懶標記給左右子樹
 def push_down(id, L, R):
+    """
+    將區間懶標加到答案中
+    下推懶標記給左右子樹
+    """
     M = (L+R)//2
     if lazy[id]:
         lazy[id*2] += lazy[id]
@@ -73,12 +81,13 @@ def push_down(id, L, R):
         lazy[id] = 0
 
 
-# 以左右子樹更新答案
 def push_up(id):
+    """
+    以左右子樹更新答案
+    """
     tree[id] = tree[id*2]+tree[id*2+1]
 
 
-N = 10**5
 N = 5
 tree = [0]*(N*4)
 lazy = [0]*(N*4)
