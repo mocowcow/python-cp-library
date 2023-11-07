@@ -12,6 +12,9 @@ class TreeNode:
         self.val = self.default_value
         self.left = self.right = None
 
+    def op(self, a, b):
+        return max(a, b)
+
     def get(self, o):
         if o is None:
             return self.default_value
@@ -33,9 +36,6 @@ class TreeNode:
                 self.right = TreeNode(self.M+1, self.R)
             self.right.update(pos, val)
         self.maintain()
-
-    def op(self, a, b):
-        return max(a, b)
 
     def query(self, i, j):
         if i <= self.L and self.R <= j:
