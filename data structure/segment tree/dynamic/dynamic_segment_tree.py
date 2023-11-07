@@ -21,15 +21,6 @@ class TreeNode:
         """
         return a+b
 
-    def get(self, o):
-        """
-        取節點值
-        沒開點就是預設值
-        """
-        if o is None:
-            return self.default_value
-        return o.val
-
     def push_down(self):
         """
         動態開點
@@ -42,7 +33,7 @@ class TreeNode:
         """
         以左右節點更新當前節點值
         """
-        self.val = self.op(self.get(self.left), self.get(self.right))
+        self.val = self.op(self.left.val, self.right.val)
 
     def update(self, pos, val):
         """
