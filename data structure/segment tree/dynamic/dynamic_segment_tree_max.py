@@ -2,6 +2,11 @@ from math import inf
 
 
 class TreeNode:
+    """
+    動態開點線段樹
+    單點更新
+    區間查詢
+    """
     __slots__ = ["L", "R", "M", "val", "left", "right"]
     default_value = -inf
 

@@ -22,14 +22,24 @@ class TreeNode:
         return a+b
 
     def get(self, o):
+        """
+        取節點值
+        沒開點就是預設值
+        """
         if o is None:
             return self.default_value
         return o.val
 
     def maintain(self):
+        """
+        以左右節點更新當前節點值
+        """
         self.val = self.op(self.get(self.left), self.get(self.right))
 
     def update(self, pos, val):
+        """
+        單點更新
+        """
         if self.L == self.R:
             self.val = val
             return
@@ -44,6 +54,9 @@ class TreeNode:
         self.maintain()
 
     def query(self, i, j):
+        """
+        區間查詢
+        """
         if i <= self.L and self.R <= j:
             return self.val
         res = self.default_value
