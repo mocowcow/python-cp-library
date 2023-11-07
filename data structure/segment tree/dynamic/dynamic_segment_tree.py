@@ -30,7 +30,15 @@ class TreeNode:
             return self.default_value
         return o.val
 
-    def maintain(self):
+    def push_down(self):
+        """
+        動態開點
+        """
+        if not self.left:
+            self.left = TreeNode(self.L, self.M)
+            self.right = TreeNode(self.M+1, self.R)
+
+    def push_up(self):
         """
         以左右節點更新當前節點值
         """
@@ -39,23 +47,22 @@ class TreeNode:
     def update(self, pos, val):
         """
         單點更新
+        將tree[pos]增加val
         """
         if self.L == self.R:
-            self.val = val
+            self.val += val
             return
+        self.push_down()
         if pos <= self.M:
-            if not self.left:
-                self.left = TreeNode(self.L, self.M)
             self.left.update(pos, val)
         else:
-            if not self.right:
-                self.right = TreeNode(self.M+1, self.R)
             self.right.update(pos, val)
-        self.maintain()
+        self.push_up()
 
     def query(self, i, j):
         """
         區間查詢
+        回傳[i, j]的總和
         """
         if i <= self.L and self.R <= j:
             return self.val
