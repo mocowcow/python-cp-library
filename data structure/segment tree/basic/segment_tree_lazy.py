@@ -2,8 +2,8 @@
 class SegmentTree:
 
     def __init__(self, n):
-        self.tree = [0]*(4*n)
-        self.lazy = [0]*(4*n)
+        self.tree = [0]*(n*4)
+        self.lazy = [0]*(n*4)
 
     def build(self, init, id, L, R):
         """
@@ -24,17 +24,16 @@ class SegmentTree:
         """
         return a+b
 
-    def push_down(self, id, L, R):
+    def push_down(self, id, L, R, M):
         """
         將區間懶標加到答案中
         下推懶標記給左右子樹
         """
-        M = (L+R)//2
         if self.lazy[id]:
-            self.lazy[id*2] += self.lazy[id]
             self.tree[id*2] += self.lazy[id]*(M-L+1)
+            self.lazy[id*2] += self.lazy[id]
+            self.tree[id*2+1] += self.lazy[id]*(R-M)
             self.lazy[id*2+1] += self.lazy[id]
-            self.tree[id*2+1] += self.lazy[id]*(R-(M+1)+1)
             self.lazy[id] = 0
 
     def push_up(self, id):
@@ -50,9 +49,9 @@ class SegmentTree:
         """
         if i <= L and R <= j:  # 當前區間目標範圍包含
             return self.tree[id]
-        self.push_down(id, L, R)
-        res = 0
         M = (L+R)//2
+        self.push_down(id, L, R, M)
+        res = 0
         if i <= M:
             res = self.op(res, self.query(id*2, L, M, i, j))
         if M+1 <= j:
@@ -67,8 +66,8 @@ class SegmentTree:
         if L == R:  # 當前區間目標範圍包含
             self.tree[id] += val
             return
-        self.push_down(id, L, R)
         M = (L+R)//2
+        self.push_down(id, L, R, M)
         if i <= M:
             self.update(id*2, L, M, i, j, val)
         else:

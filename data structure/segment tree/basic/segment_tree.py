@@ -2,7 +2,7 @@
 class SegmentTree:
 
     def __init__(self, n):
-        self.tree = [0]*(4*n)
+        self.tree = [0]*(n*4)
 
     def build(self, init, id, L, R):
         """
