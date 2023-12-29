@@ -23,21 +23,21 @@ class Trie:
     def add(self, val) -> None:
         curr = self.root
         for i in reversed(range(self.MX)):
-            b = (val >> i) & 1
-            curr = curr.child[b]
+            bit = (val >> i) & 1
+            curr = curr.child[bit]
             curr.cnt += 1
 
     def find(self, val):
         curr = self.root
         res = 0
         for i in reversed(range(self.MX)):
-            b = (val >> i) & 1
-            r = b ^ 1
-            if curr.child[r].cnt > 0:
-                curr = curr.child[r]
+            bit = (val >> i) & 1
+            rev = bit ^ 1
+            if curr.child[rev].cnt > 0:
+                curr = curr.child[rev]
                 res |= (1 << i)
             else:
-                curr = curr.child[b]
+                curr = curr.child[bit]
         return res
 
     def kill(self, val) -> None:
