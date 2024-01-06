@@ -29,11 +29,9 @@ def bs_left(a, x):
     hi = len(a)
     while lo < hi:
         mid = (lo+hi) // 2
-        # 等價反向寫法
-        # if not a[mid] >= x :
-        if a[mid] < x:
+        if not a[mid] >= x:
             lo = mid+1
-        else:
+        else:  # a[mid] >= x:
             hi = mid
     return lo
 
@@ -49,13 +47,17 @@ def bs_right(a, x):
     hi = len(a)
     while lo < hi:
         mid = (lo+hi) // 2
-        # 等價反向寫法
-        # if not a[mid] > x :
-        if a[mid] <= x:
+        if not a[mid] > x:
             lo = mid+1
-        else:
+        else:  # a[mid] > x
             hi = mid
     return lo
+
+# 簡單總結：
+# a[i] ≥ x：找第一個 大於等於
+# a[i] > x：找第一個 大於
+# a[i] ≤ x：找最後一個 小於等於； 先求 a[i] > x 後 -1
+# a[i] < x：找最後一個 小於； 先求 a[i] ≥ x 後 -1
 
 
 # 最大值最小化 / 最小值最大化
