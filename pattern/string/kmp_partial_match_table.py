@@ -1,5 +1,6 @@
 
-def partial_match_table(s):  # PMT for KMP string search
+# PMT for KMP string search
+def partial_match_table(s):
     N = len(s)
     pmt = [0]*N
     i, j = 1, 0
@@ -15,7 +16,8 @@ def partial_match_table(s):  # PMT for KMP string search
     return pmt
 
 
-def prefix_function(s):  # optimized version
+# PMT optimized version
+def prefix_function(s):
     N = len(s)
     pmt = [0]*N
     for i in range(1, N):
@@ -28,7 +30,9 @@ def prefix_function(s):  # optimized version
     return pmt
 
 
-def KMP(s, p):  # search p in s, return first index or -1
+# search p in s, return first index.
+# return -1 if not found
+def KMP(s, p):
     M, N = len(s), len(p)
     pmt = prefix_function(p)
     j = 0
@@ -38,24 +42,25 @@ def KMP(s, p):  # search p in s, return first index or -1
         if s[i] == p[j]:
             j += 1
         if j == N:
-            return i-j
+            return i-j+1
     return -1
 
 
-def KMP_freq(s, p):  # search p in s, return frequency of p
+# search p in s, return every starting idnex of p
+def KMP_freq(s, p):
     M, N = len(s), len(p)
     pmt = prefix_function(p)
     j = 0
-    cnt = 0
+    res = []
     for i in range(M):
         while j > 0 and s[i] != p[j]:
             j = pmt[j-1]
         if s[i] == p[j]:
             j += 1
         if j == N:
-            cnt += 1
+            res.append(i-j+1)
             j = pmt[j-1]
-    return cnt
+    return res
 
 
 test_cases = []
