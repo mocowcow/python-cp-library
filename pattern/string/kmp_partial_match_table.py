@@ -12,11 +12,11 @@ def partial_match_table(s):
         if s[i] == s[j]:
             j += 1
             i += 1
-            pmt[i-1] = j
+            pmt[i - 1] = j
         elif j == 0:
             i += 1
         else:
-            j = pmt[j-1]
+            j = pmt[j - 1]
     return pmt
 
 
@@ -42,11 +42,11 @@ def KMP(s, p):
     j = 0
     for i in range(M):
         while j > 0 and s[i] != p[j]:
-            j = pmt[j-1]
+            j = pmt[j - 1]
         if s[i] == p[j]:
             j += 1
         if j == N:
-            return i-j+1
+            return i - j + 1
     return -1
 
 
@@ -58,12 +58,12 @@ def KMP_freq(s, p):
     res = []
     for i in range(M):
         while j > 0 and s[i] != p[j]:
-            j = pmt[j-1]
+            j = pmt[j - 1]
         if s[i] == p[j]:
             j += 1
         if j == N:
-            res.append(i-j+1)
-            j = pmt[j-1]
+            res.append(i - j + 1)
+            j = pmt[j - 1]
     return res
 
 
