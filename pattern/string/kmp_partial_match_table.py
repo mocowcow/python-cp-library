@@ -1,4 +1,8 @@
 
+import random
+import string
+
+
 # PMT for KMP string search
 def partial_match_table(s):
     N = len(s)
@@ -63,10 +67,11 @@ def KMP_freq(s, p):
     return res
 
 
-test_cases = []
-test_cases.append("abac")
-test_cases.append("abababca")
-test_cases.append("12312313123123112312")
+def test_same(g, f):
+    for _ in range(1000):
+        s = "".join(random.choice(string.ascii_letters) for _ in range(1000))
+        assert (g(s) == f(s))
+    print('passed')
 
-for tc in test_cases:
-    assert partial_match_table(tc) == prefix_function(tc)
+
+test_same(partial_match_table, prefix_function)
