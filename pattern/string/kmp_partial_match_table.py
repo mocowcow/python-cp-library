@@ -51,7 +51,7 @@ def KMP(s, p):
 
 
 # search p in s, return every starting idnex of p
-def KMP_freq(s, p):
+def KMP_all(s, p):
     M, N = len(s), len(p)
     pmt = prefix_function(p)
     j = 0
