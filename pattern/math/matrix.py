@@ -1,3 +1,26 @@
+# 轉移矩陣trans
+# trans^k * f(0) = f(0+k)
+
+# f(i)  = [ arg1, _ ]
+#         [ arg2, _ ]
+
+# trans = [ A, B ]
+#         [ C, D ]
+
+# f(i+1)  = [ arg1*A + arg2*B, _ ]
+#           [ arg1*C + arg2*D, _ ]
+
+# A = f(i).arg1 對 f(i+1).arg1 的貢獻
+# B = f(i).arg2 對 f(i+1).arg1 的貢獻
+# C = f(i).arg1 對 f(i+1).arg2 的貢獻
+# D = f(i).arg2 對 f(i+1).arg2 的貢獻
+
+# 矩陣快速冪優化DP
+# LC70 https://leetcode.com/problems/climbing-stairs/
+# LC1220 https://leetcode.com/problems/count-vowels-permutation/
+# LC2851 https://leetcode.com/problems/string-transformation/
+
+
 MOD = 10**9+7
 
 
@@ -19,26 +42,3 @@ def mat_mul(a, b):
                 c[i][j] += a[i][k]*b[k][j]
             c[i][j] %= MOD
     return c
-
-
-# 轉移矩陣trans
-# trans^k * f(0) = f(0+k)
-
-# f(i)  = [ arg1, _ ]
-#         [ arg2, _ ]
-
-# trans = [ A, B ]
-#         [ C, D ]
-
-# f(i+1)  = [ arg1*A + arg2*B, _ ]
-#           [ arg1*C + arg2*D, _ ]
-
-# A = f(i).arg1 對 f(i+1).arg1 的貢獻
-# B = f(i).arg2 對 f(i+1).arg1 的貢獻
-# C = f(i).arg1 對 f(i+1).arg2 的貢獻
-# D = f(i).arg2 對 f(i+1).arg2 的貢獻
-
-# 練習題：矩陣快速冪優化DP
-# - [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
-# - [1220. Count Vowels Permutation](https://leetcode.com/problems/count-vowels-permutation/)
-# - [2851. String Transformation](https://leetcode.com/problems/string-transformation/)
