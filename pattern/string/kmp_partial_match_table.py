@@ -2,6 +2,10 @@
 import random
 import string
 
+# KMP 求子字串起點
+# LC2851 https://leetcode.com/problems/string-transformation/
+# LC3008 https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/
+
 
 # PMT for KMP string search
 def partial_match_table(s):
