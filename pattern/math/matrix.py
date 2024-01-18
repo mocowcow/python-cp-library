@@ -22,7 +22,21 @@ def mat_mul(a, b):
 
 
 # 轉移矩陣trans
-# f(0) * trans^k = f(0+k)
+# trans^k * f(0) = f(0+k)
+
+# f(i)  = [ arg1, _ ]
+#         [ arg2, _ ]
+
+# trans = [ A, B ]
+#         [ C, D ]
+
+# f(i+1)  = [ arg1*A + arg2*B, _ ]
+#           [ arg1*C + arg2*D, _ ]
+
+# A = f(i).arg1 對 f(i+1).arg1 的貢獻
+# B = f(i).arg2 對 f(i+1).arg1 的貢獻
+# C = f(i).arg1 對 f(i+1).arg2 的貢獻
+# D = f(i).arg2 對 f(i+1).arg2 的貢獻
 
 # 練習題：矩陣快速冪優化DP
 # - [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
