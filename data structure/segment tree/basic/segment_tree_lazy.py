@@ -63,13 +63,14 @@ class SegmentTree:
         區間更新
         對[i, j]每個索引都增加val
         """
-        if L == R:  # 當前區間目標範圍包含
-            self.tree[id] += val
+        if i <= L and R <= j:  # 當前區間目標範圍包含
+            self.tree[id] += val * (R - L + 1)
+            self.lazy[id] += val
             return
         M = (L+R)//2
         self.push_down(id, L, R, M)
         if i <= M:
             self.update(id*2, L, M, i, j, val)
-        else:
+        if M < j:
             self.update(id*2+1, M+1, R, i, j, val)
         self.push_up(id)
