@@ -1,3 +1,4 @@
+
 class PrefixSum2D:
 
     def __init__(self, matrix):
@@ -12,16 +13,3 @@ class PrefixSum2D:
     def range_sum(self, r1, c1, r2, c2):
         ps = self.ps
         return ps[r2+1][c2+1] - ps[r2+1][c1] - ps[r1][c2+1] + ps[r1][c1]
-
-
-mat = [[1, 2, 3],
-       [4, 5, 6],
-       [7, 8, 9]]
-
-ps2d = PrefixSum2D(mat)
-assert ps2d.range_sum(0, 0, 2, 2) == 45
-assert ps2d.range_sum(0, 0, 1, 2) == 21
-assert ps2d.range_sum(0, 1, 2, 2) == 33
-assert ps2d.range_sum(2, 1, 2, 2) == 17
-assert ps2d.range_sum(1, 1, 1, 2) == 11
-assert ps2d.range_sum(2, 2, 2, 2) == 9
