@@ -6,7 +6,7 @@ import random
 # LC2602 https://leetcode.com/problems/minimum-operations-to-make-all-array-elements-equal
 # LC2615 https://leetcode.com/problems/sum-of-distances
 # LC2968 https://leetcode.com/problems/apply-operations-to-maximize-frequency-score
-# LC3806 https://leetcode.com/problems/minimum-moves-to-pick-k-ones/submissions/
+# LC3806 https://leetcode.com/problems/minimum-moves-to-pick-k-ones
 
 
 class PrefixSum:
@@ -15,20 +15,24 @@ class PrefixSum:
         self.nums = nums
         self.ps = list(accumulate(nums, initial=0))
 
-    def distance_sum(self, mid, left=0, right=None):
+    def distance_sum(self, mid, left=0, right=None, t=None):
         """
-        nums[left, right] 全部改成 nums[mid] 的距離總和
-        預設範圍為 [0, N - 1]
+        nums[left, right] 全部改成 t 的距離總和
+        預設 [left, right] = [0, N - 1]
+        預設 t = nums[mid]
+        限制：
+        nums[left, mid - 1] <= t
+        nums[mid, right] >= t
         """
-        t = self.nums[mid]
         ps = self.ps
         if right is None:
             right = self.N - 1
 
-        s1 = (mid - left + 1) * t  # [left, mid]
-        s1 -= (ps[mid + 1] - ps[left])
-        s2 = ps[right + 1] - ps[mid]  # [mid, right]
-        s2 -= (right - mid + 1) * t
+        if t is None:
+            t = self.nums[mid]
+
+        s1 = (mid - left) * t - (ps[mid] - ps[left])  # [left, mid - 1]
+        s2 = (ps[right + 1] - ps[mid]) - (right - mid + 1) * t  # [mid, right]
         return s1 + s2
 
 
