@@ -7,41 +7,41 @@ from math import inf
 # O(V^2)
 # better performance for dense graph
 def dijkstra_bruteforce(g, n, src):
-    vis = [False]*n
-    dis = [inf]*n
-    dis[src] = 0
+    vis = [False] * n
+    dist = [inf] * n
+    dist[src] = 0
     while True:  # at most loop for n times
         i = -1
         for j in range(n):  # find shortest unvisited node i
-            if not vis[j] and (i < 0 or dis[j] < dis[i]):
+            if not vis[j] and (i < 0 or dist[j] < dist[i]):
                 i = j
-        if i < 0 or dis[i] == inf:  # no more path
+        if i < 0 or dist[i] == inf:  # no more path
             break
         vis[i] = True
         for j, c in g[i]:  # update adjacent nodes
-            new_cost = cost+c
-            if new_cost < dis[j]:
-                dis[j] = new_cost
-    return dis
+            new_cost = cost + c
+            if new_cost < dist[j]:
+                dist[j] = new_cost
+    return dist
 
 
 # heap optimized dijkstra
 # O(E log E)
 def dijkstra(g, n, src):
-    dis = [inf]*(n)
-    dis[src] = 0
+    dist = [inf] * n
+    dist[src] = 0
     heap = [(0, src)]
     while heap:
         cost, curr = heappop(heap)
-        if cost > dis[curr]:
+        if cost > dist[curr]:
             continue
-        dis[curr] = cost
+        dist[curr] = cost
         for adj, c in g[curr]:
-            new_cost = cost+c
-            if new_cost < dis[adj]:
-                dis[adj] = new_cost  # important pruning
+            new_cost = cost + c
+            if new_cost < dist[adj]:
+                dist[adj] = new_cost  # important pruning
                 heappush(heap, (new_cost, adj))
-    return dis
+    return dist
 
 
 # 6 nodes directed graph
