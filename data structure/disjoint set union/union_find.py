@@ -1,9 +1,7 @@
-from collections import defaultdict
-
 
 class UnionFind:
     def __init__(self, n):
-        self.parent = [0]*n
+        self.parent = [0] * n
         for i in range(n):
             self.parent[i] = i
 

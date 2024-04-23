@@ -1,10 +1,8 @@
-from collections import defaultdict
-
 
 class UnionFind:
     def __init__(self, n):
-        self.parent = [0]*n
-        self.rank = [0]*n  # 可以是節點數或高度，此為高度
+        self.parent = [0] * n
+        self.rank = [0] * n  # 可以是節點數或高度，此為高度
         for i in range(n):
             self.parent[i] = i
 
