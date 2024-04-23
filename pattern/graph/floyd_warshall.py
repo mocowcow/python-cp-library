@@ -6,7 +6,7 @@ from collections import defaultdict
 class FloydWarshall:
     def __init__(self, n):
         self.n = n
-        self.dp = [[inf]*n for _ in range(n)]
+        self.dp = [[inf] * n for _ in range(n)]
         for i in range(n):
             self.dp[i][i] = 0
 
@@ -23,7 +23,7 @@ class FloydWarshall:
                 if self.dp[i][k] == inf:  # pruning
                     continue
                 for j in range(self.n):
-                    new_dist = self.dp[i][k]+self.dp[k][j]
+                    new_dist = self.dp[i][k] + self.dp[k][j]
                     if new_dist < self.dp[i][j]:
                         self.dp[i][j] = new_dist
 
@@ -49,6 +49,6 @@ class FloydWarshallDict:
                 if self.dp[i][k] == inf:  # pruning
                     continue
                 for j in self.dp:
-                    new_dist = self.dp[i][k]+self.dp[k][j]
+                    new_dist = self.dp[i][k] + self.dp[k][j]
                     if new_dist < self.dp[i][j]:
                         self.dp[i][j] = new_dist
