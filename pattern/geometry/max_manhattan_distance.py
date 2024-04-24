@@ -1,6 +1,11 @@
 import random
 
 # 求兩點之間最大曼哈頓距離
+# LC1131 https://leetcode.com/problems/maximum-of-absolute-value-expression/
+# LC3102 https://leetcode.com/problems/minimize-manhattan-distances/
+
+
+# 最大曼哈頓距離：
 # max( |x1 - x2| + |y2 - y2| )
 
 # 消除絕對值得到：
