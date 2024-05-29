@@ -9,15 +9,15 @@ def count(num):
     num += 1
     bit_cnt = 0
     for i in range(num.bit_length()):
-        rep_size = 1 << (i + 1)
+        rep_size, rep_half_size = 1 << (i + 1), 1 << i
         rep_cnt, extra = divmod(num, rep_size)
 
         # rep_cnt are complete
-        bit_cnt += rep_size * rep_cnt
+        bit_cnt += rep_half_size * rep_cnt
 
         # extra numbers are lonely
         # but only last half part are 1s
-        extra -= rep_size // 2
+        extra -= rep_half_size
         if extra > 0:
             bit_cnt += extra
     return bit_cnt
