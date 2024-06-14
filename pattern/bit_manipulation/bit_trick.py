@@ -9,19 +9,29 @@ from collections import Counter
 
 def bit_trick(nums):
 
-    class item:
+    class Item:
+        """
+        以索引 i 為固定右端點
+        滿足子陣列 nums[j..i] 所有元素按位運算的結果等於 val
+        其中 first <= j <= last
+        """
+
         def __init__(self, val, first, last) -> None:
             self.val = val  # 子陣列按位運算結果
-            self.first = first  # 第一個滿足的端點
-            self.last = last  # 最後一個滿足的端點
+            self.first = first  # 最小的 j
+            self.last = last  # 最大的 j
 
     freq = Counter()  # 依按位運算結果統計子陣列個數
     op_res = []
     for i, x in enumerate(nums):
-        op_res.append(item(x, i, i))
+        # 每個子陣列和 x 按位運算
+        for it in op_res:
+            it.val |= x  # OR, AND, GCD
+        op_res.append(Item(x, i, i))
+
+        # 去重合併，更新端點
         tail = 0
         for it in op_res:
-            it.val |= x  # 按位運算操作
             if op_res[tail].val != it.val:
                 tail += 1
                 op_res[tail] = it
