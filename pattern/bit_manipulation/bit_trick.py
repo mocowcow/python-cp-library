@@ -15,7 +15,7 @@ def bit_trick(nums):
             self.first = first  # 第一個滿足的端點
             self.last = last  # 最後一個滿足的端點
 
-    d = Counter()
+    freq = Counter()  # 依按位運算結果統計子陣列個數
     op_res = []
     for i, x in enumerate(nums):
         op_res.append(item(x, i, i))
@@ -29,7 +29,7 @@ def bit_trick(nums):
                 op_res[tail].last = it.last  # 更新最後端點
         del op_res[tail + 1:]  # op_res = op_res[:tail + 1]
 
-        # 依按位運算結果統計子陣列個數
+        # 依按位運算結果更新答案
         for it in op_res:
-            d[it.val] += it.last - it.first + 1
-    return d
+            freq[it.val] += it.last - it.first + 1
+    return freq
