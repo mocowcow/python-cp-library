@@ -24,6 +24,7 @@ val 只可能不變、變大
 # LC 898 https://leetcode.com/problems/bitwise-ors-of-subarrays/
 # LC 1521 https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/
 # LC 2411 https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/
+# LC 3097 https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/
 # LC 3171 https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/
 
 from collections import Counter
