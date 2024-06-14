@@ -1,10 +1,32 @@
-from collections import Counter
 
 
+"""
+設 op(nums[j..i]) 為子陣列中所有元素做位運算的結果
+
+以 bitwise OR 為例
+每當陣列 nums 加入一個新元素 x，其按位運算結果 val 只有兩種情況
+- val 不變
+- val 變大：至少有一個位元從 0 變成 1
+
+而 nums[i] 最多只有 log MX 個位元，MX = max(nums)
+當枚舉索引 i 為子陣列右端點時，val = op(nums[j..i]) 最多只有 log MX 種結果
+
+對於 bitwise OR 來說
+j 離 i 越遠，子陣列元素越多，val 越可能變大；反之，元素越少，val 可能較小。  
+
+bitwise AND 同理
+val 只可能不變、變大
+子陣列元素越多，val 越可能變小
+"""
+
+
+# 求子陣列按位運算結果
 # LC 898 https://leetcode.com/problems/bitwise-ors-of-subarrays/
 # LC 1521 https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/
 # LC 2411 https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/
 # LC 3171 https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/
+
+from collections import Counter
 
 
 def bit_trick(nums):
