@@ -1,4 +1,24 @@
 
+"""
+
+在無向樹狀圖中，直徑指的是樹中任意兩點之間的最長路徑長度。
+注意：
+- 直徑可能不只一條。  
+- 邊權為負數時不適用。  
+
+選擇任意出發點 start，透過 dfs/bfs 找到距離 start 最遠的節點 u。  
+再次從 u 出發，dfs/bfs 找到距離 u 最遠的節點 v。  
+(u, v) 即為直徑。  
+
+https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2826761/3203-he-bing-liang-ke-shu-hou-de-zui-xia-ulhz/
+https://oi-wiki.org/graph/tree-diameter/#%E5%81%9A%E6%B3%95-1-%E4%B8%A4%E6%AC%A1-dfs
+
+"""
+
+# LC 2303 https://leetcode.com/problems/find-minimum-diameter-after-merging-two-trees/
+# LC 1245(會員題) https://leetcode.com/problems/tree-diameter/
+
+
 def diameter_dfs(edges):
     N = len(edges) + 1
     g = [[] for _ in range(N)]
