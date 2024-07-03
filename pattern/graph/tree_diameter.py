@@ -10,6 +10,23 @@
 再次從 u 出發，dfs/bfs 找到距離 u 最遠的節點 v。  
 (u, v) 即為直徑。  
 
+
+為何 dfs/bfs 一定能找到構成直徑的節點？
+證明：
+
+樹狀圖可以任意調整形狀，故將起點 start 當作根節點，比較方便討論。  
+
+設 (u, v) 為一直徑。  
+d1 為 (start, u) 的距離，d2 為 (start, v) 的距離，且 d1 >= d2。
+
+從任意點 start 做 dfs/bfs 找到節點 end。
+case1：(start, end) 小於 d2。
+根據 dfs 找最遠的邏輯，不可能找到比 d2 更近的點。  
+
+case2：(start, end) 大於 d2。
+若為真，則可以拿 end 取代 u, v 任一點，構成更長的路徑。
+此結論與 (u, v) 為直徑的前提矛盾。
+
 https://leetcode.cn/problems/find-minimum-diameter-after-merging-two-trees/solutions/2826761/3203-he-bing-liang-ke-shu-hou-de-zui-xia-ulhz/
 https://oi-wiki.org/graph/tree-diameter/#%E5%81%9A%E6%B3%95-1-%E4%B8%A4%E6%AC%A1-dfs
 
