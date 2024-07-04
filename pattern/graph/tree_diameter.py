@@ -94,3 +94,39 @@ def diameter_bfs(edges):
     u, dist = bfs(0)
     v, dist = bfs(u)
     return dist
+
+
+def diameter_topology_sort(edges):
+    N = len(edges) + 1
+
+    if N <= 3:
+        return N - 1
+
+    g = [[] for _ in range(N)]
+    indegree = [0] * N
+    for a, b in edges:
+        g[a].append(b)
+        g[b].append(a)
+        indegree[a] += 1
+        indegree[b] += 1
+
+    q = []
+    for i in range(N):
+        if indegree[i] == 1:
+            q.append(i)
+
+    remain = N
+    dist = 0
+    while remain > 2:
+        dist += 1
+        q2 = []
+        for i in q:
+            remain -= 1
+            for j in g[i]:
+                indegree[j] -= 1
+                if indegree[j] == 1:
+                    q2.append(j)
+        q = q2
+
+    diameter = dist * 2 + remain - 1
+    return diameter
