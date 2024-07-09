@@ -26,6 +26,7 @@ val 只可能不變、變大
 # LC 2411 https://leetcode.com/problems/smallest-subarrays-with-maximum-bitwise-or/
 # LC 3097 https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/
 # LC 3171 https://leetcode.com/problems/find-subarray-with-bitwise-or-closest-to-k/
+# LC 3209 https://leetcode.com/problems/number-of-subarrays-with-and-value-of-k/
 
 from collections import Counter
 
