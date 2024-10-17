@@ -1,21 +1,25 @@
 import random
 
-MOD1 = 1000000901
-MOD2 = 1000015279
+MOD1 = 1_000_000_901
+MOD2 = 1_000_015_279
+MOD3 = 1_000_000_000_000_000_000_003
 
 
 class RollingHash:
     def __init__(self, s, mod):
+        # self.s = s
         self.mod = mod
-        base = random.randint(2, mod-1)
-        ps = self.ps = [0]
-        p = self.p = [1]
-        for c in s:
-            ps.append((ps[-1] * base + ord(c)) % mod)
-            p.append(p[-1] * base % mod)
+        # base = random.randint(2, mod-1)
+        base = 87
+        ps = self.ps = [0] * (len(s) + 1)
+        base_pow = self.base_pow = [1] * (len(s) + 1)
+        for i, c in enumerate(s):
+            ps[i+1] = (ps[i] * base + ord(c)) % mod
+            base_pow[i+1] = (base_pow[i] * base) % mod
 
     def get(self, L, R):
-        return (self.ps[R+1] - self.ps[L] * self.p[R-L+1]) % self.mod
+        # print(self.s[L:R+1])
+        return (self.ps[R+1] - self.ps[L] * self.base_pow[R-L+1]) % self.mod
 
 
 class DoubleHash:
