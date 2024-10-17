@@ -7,6 +7,10 @@ import string
 # LC3008 https://leetcode.com/problems/find-beautiful-indices-in-the-given-array-ii/
 
 
+# LPS (Longest Prefix Suffix)
+# LC1392 https://leetcode.com/problems/longest-happy-prefix/
+
+
 # PMT for KMP string search
 def partial_match_table(s):
     N = len(s)

@@ -1,5 +1,14 @@
 import random
 
+# LC28 https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+# LC187 https://leetcode.com/problems/repeated-dna-sequences/
+# LC1044 https://leetcode.com/problems/longest-duplicate-substring/
+# LC1392 https://leetcode.com/problems/longest-happy-prefix/
+# LC3213 https://leetcode.com/problems/construct-string-with-minimum-cost/
+# LC3292 https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/
+# LC3303 https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/
+
+
 MOD1 = 1_000_000_901
 MOD2 = 1_000_015_279
 MOD3 = 1_000_000_000_000_000_000_003
