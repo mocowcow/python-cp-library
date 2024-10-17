@@ -24,11 +24,27 @@ class RollingHash:
 
 class DoubleHash:
     def __init__(self, s, mod1, mod2):
-        self.h1 = RollingHash(s, mod1)
-        self.h2 = RollingHash(s, mod2)
+        # self.s = s
+        self.mod1 = mod1
+        self.mod2 = mod2
+        # base = random.randint(2, mod-1)
+        base1 = 87
+        base2 = 116
+        ps1 = self.ps1 = [0] * (len(s) + 1)
+        ps2 = self.ps2 = [0] * (len(s) + 1)
+        base_pow1 = self.base_pow1 = [1] * (len(s) + 1)
+        base_pow2 = self.base_pow2 = [1] * (len(s) + 1)
+        for i, c in enumerate(s):
+            ps1[i+1] = (ps1[i] * base1 + ord(c)) % mod1
+            ps2[i+1] = (ps2[i] * base2 + ord(c)) % mod2
+            base_pow1[i+1] = (base_pow1[i] * base1) % mod1
+            base_pow2[i+1] = (base_pow2[i] * base2) % mod2
 
     def get(self, L, R):
-        return (self.h1.get(L, R), self.h2.get(L, R))
+        # print(self.s[L:R+1])
+        h1 = (self.ps1[R+1] - self.ps1[L] * self.base_pow1[R-L+1]) % self.mod1
+        h2 = (self.ps2[R+1] - self.ps2[L] * self.base_pow2[R-L+1]) % self.mod2
+        return (h1, h2)
 
 
 s = "levellevelasdasdaaasdaaaaaaaaaaa"
