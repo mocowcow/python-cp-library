@@ -77,3 +77,24 @@ def test_same(s):
 
 
 test_same(s)
+
+
+# functional version
+# more flexible for multiple hash or string modify
+def build(s, mod, base):
+    ps = [0] * (len(s) + 1)
+    base_pow = [1] * (len(s) + 1)
+    for i, c in enumerate(s):
+        ps[i+1] = (ps[i] * base + ord(c)) % mod
+        base_pow[i+1] = (base_pow[i] * base) % mod
+    return ps, base_pow
+
+
+def get(mod, ps, base_pow, L, R):
+    return (ps[R+1] - ps[L] * base_pow[R-L+1]) % mod
+
+
+# modify s[i] to "c2"
+def modify(mod, base_pow, old_hash, s, i, c2):
+    p = base_pow[len(s)-1-i]
+    return (old_hash - ord(s[i]) * p + ord(c2) * p) % mod
