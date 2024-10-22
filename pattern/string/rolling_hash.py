@@ -7,6 +7,7 @@ import random
 # LC3213 https://leetcode.com/problems/construct-string-with-minimum-cost/
 # LC3292 https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-ii/
 # LC3303 https://leetcode.com/problems/find-the-occurrence-of-first-almost-equal-substring/
+# LC3327 https://leetcode.com/problems/check-if-dfs-strings-are-palindromes/
 
 
 MOD1 = 1_000_000_901
