@@ -10,6 +10,10 @@ import random
 # LC3327 https://leetcode.com/problems/check-if-dfs-strings-are-palindromes/
 
 
+# 防 hack
+# double hash
+# mod 或是 base 至少一個隨機值
+
 MOD1 = 1_000_000_901
 MOD2 = 1_000_015_279
 MOD3 = 1_000_000_000_000_000_000_003
