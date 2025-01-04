@@ -26,3 +26,9 @@ for i in range(2, MX+1):
     f[i] = (f[i-1]*i) % MOD
     inv[i] = (MOD-MOD//i)*inv[MOD % i] % MOD
     finv[i] = finv[i-1]*inv[i] % MOD
+
+
+# combanations of n choose k
+def comb(n, k):
+    res = f[n] * finv[k] * finv[n-k]
+    return res
