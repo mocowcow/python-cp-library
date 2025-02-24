@@ -1,5 +1,6 @@
 
 # Sieve of Eratosthenes
+# coellect all primes under n
 # O(n log (log n))
 def get_prime(n):
     sieve = [True] * (n + 1)
@@ -12,8 +13,9 @@ def get_prime(n):
     return prime
 
 
-# build prime table
-# O(sqrt(n))
+# Sieve of Eratosthenes
+# build prime table only
+# O(n log (log n))
 def prime_table(n):
     sieve = [True] * (n + 1)
     sieve[0] = sieve[1] = False
