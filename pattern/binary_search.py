@@ -1,5 +1,6 @@
 import bisect
 import random
+import math
 
 
 # Arrays.binarySearch() in Java
@@ -95,3 +96,46 @@ def test_same(g, f):
 
 test_same(bisect.bisect_left, bs_left)
 test_same(bisect.bisect_right, bs_right)
+
+
+# 浮點數二分 寫法一
+# 判斷 lo 與 hi 的區間是否超過誤差 eps
+def bs_float1():
+
+    def ok(mid):
+        pass
+
+    eps = 1e-5
+    lo = 0
+    hi = 1e9
+    while lo + eps < hi:
+        mid = (lo + hi) / 2
+        if not ok(mid):
+            lo = mid
+        else:
+            hi = mid
+    return lo
+
+
+# 浮點數二分 寫法二
+# 直接循環足夠大的次數
+#
+# 每次二分使 [lo, hi] 減半，使 hi - lo 等於 1 需要 log(hi-lo) 次。
+# 然後還要把 1 繼續減半直到小於 1/eps，所以還需要 log(1/eps) 次。
+# 需要至少 k = log ((hi-lo) / eps) 次。注意循環次數向上取整。
+def bs_float2():
+
+    def ok(mid):
+        pass
+
+    lo = 0
+    hi = 1e15
+    eps = 1e-5
+    k_rounds = math.log2((hi - lo) / eps) + 1
+    for _ in range(k_rounds):
+        mid = (lo + hi) / 2
+        if not ok(mid):
+            lo = mid
+        else:
+            hi = mid
+    return lo
