@@ -10,12 +10,6 @@ def sumMtoN(m, n):
     return (n+m)*(n-m+1)//2
 
 
-# m連加到n
-# 沒效率版
-def mn(m, n):
-    return n*(n+1)//2-(m-1)*(m)//2
-
-
 # 最大公因數
 def gcd(a, b):
     if b == 0:
