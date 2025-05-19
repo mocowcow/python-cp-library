@@ -158,7 +158,8 @@ def tree_LCA():
     for jump in range(1, MX):
         for i in range(N):
             temp = f[i][jump-1]
-            f[i][jump] = f[temp][jump-1]
+            if temp != -1:  # 必須存在中繼點
+                f[i][jump] = f[temp][jump-1]
 
     def get_LCA(x, y):
         if depth[x] > depth[y]:
