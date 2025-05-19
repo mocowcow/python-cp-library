@@ -30,17 +30,16 @@ def dijkstra_bruteforce(g, n, src):
 def dijkstra(g, n, src):
     dist = [inf] * n
     dist[src] = 0
-    heap = [(0, src)]
-    while heap:
-        cost, curr = heappop(heap)
+    h = [(0, src)]
+    while h:
+        cost, curr = heappop(h)
         if cost > dist[curr]:
             continue
-        dist[curr] = cost
         for adj, c in g[curr]:
             new_cost = cost + c
             if new_cost < dist[adj]:
                 dist[adj] = new_cost  # important pruning
-                heappush(heap, (new_cost, adj))
+                heappush(h, (new_cost, adj))
     return dist
 
 
