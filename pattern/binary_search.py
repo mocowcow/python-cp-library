@@ -131,7 +131,8 @@ def bs_float2():
     lo = 0
     hi = 1e15
     eps = 1e-5
-    k_rounds = math.log2((hi - lo) / eps) + 1
+    k_rounds = math.ceil(math.log2((hi - lo) / eps)) + 1
+    k_rounds = 100  # 或直接循足夠的次數
     for _ in range(k_rounds):
         mid = (lo + hi) / 2
         if not ok(mid):
