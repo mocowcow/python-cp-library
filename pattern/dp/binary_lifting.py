@@ -1,4 +1,3 @@
-# pylint: disable=pointless-string-statement
 
 """
 倍增算法 (binary lifting 或 binary jumping)

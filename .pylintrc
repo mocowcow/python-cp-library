@@ -1,0 +1,5 @@
+[MESSAGES CONTROL]
+# PylintC0103:invalid-name — Used when the name doesn't conform to naming rules associated to its type (constant, variable, class...).
+# PylintW0105:pointless-string-statement — String statement has no effect (not a docstring).
+
+disable=C0103,W0105
