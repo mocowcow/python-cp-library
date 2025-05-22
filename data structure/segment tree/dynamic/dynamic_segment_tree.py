@@ -33,6 +33,7 @@ class TreeNode:
         """
         以左右節點更新當前節點值
         """
+        assert self.left is not None and self.right is not None
         self.val = self.op(self.left.val, self.right.val)
 
     def update(self, pos, val):
@@ -44,6 +45,7 @@ class TreeNode:
             self.val += val
             return
         self.push_down()
+        assert self.left is not None and self.right is not None
         if pos <= self.M:
             self.left.update(pos, val)
         else:
