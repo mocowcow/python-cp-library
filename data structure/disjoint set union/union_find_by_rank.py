@@ -2,6 +2,7 @@
 class UnionFind:
     def __init__(self, n):
         self.parent = [0] * n
+        self.component_cnt = n  # 連通塊數量
         self.rank = [0] * n  # 可以是節點數或高度，此為高度
         for i in range(n):
             self.parent[i] = i
@@ -12,6 +13,7 @@ class UnionFind:
         if px == py:
             return
 
+        self.component_cnt -= 1  # 連通塊減少 1
         if self.rank[px] > self.rank[py]:  # 限制 px <= py
             px, py = py, px
 
