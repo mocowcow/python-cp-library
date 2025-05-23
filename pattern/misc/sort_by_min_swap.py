@@ -132,6 +132,9 @@ def union_find_component(a):
 # UVa 10810 https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1751
 
 
+# 做法一
+# 從左到右遍歷 a 的每個元素 x
+# 用 BIT 維護各元素頻率，區間查詢左方大於 x 的元素個數
 def BIT_inversion(a):
     class BIT:
         """
@@ -184,7 +187,40 @@ def BIT_inversion(a):
     return cnt
 
 
-# test bubble sort vs inversions
+# 做法二
+# 合併排序
+# 當兩個有序陣列 L, R 合併
+# L 剩餘最小元素為 min(L)，R 剩餘最小元素為 min(R)
+# 若 min(L) > min(R) 則代表 L 剩餘所有的元素都大於 min(R)，每個都可以和 min(R) 構成逆序對
+def merge_sort_inversion(src):
+
+    def f(a):
+        nonlocal cnt
+        N = len(a)
+        if N == 1:
+            return a
+        M = N // 2
+        L, R = f(a[:M]), f(a[M:])
+        res = []
+        i = j = 0
+        while i < len(L) and j < len(R):
+            if L[i] <= R[j]:
+                res.append(L[i])
+                i += 1
+            else:
+                res.append(R[j])
+                cnt += len(L) - i  # 左方 L 比有幾個數比 R[j] 大
+                j += 1
+        res.extend(L[i:])
+        res.extend(R[j:])
+        return res
+
+    cnt = 0
+    f(src)
+    return cnt
+
+
+# 測試泡沫排序的交換次數與以上方法統計逆序對相同
 def bubble(a):
     N = len(a)
     cnt = 0
@@ -195,8 +231,11 @@ def bubble(a):
                 cnt += 1
     return cnt
 
+
 a = list(range(100))
 for _ in range(1000):
     import random
     random.shuffle(a)
-    assert bubble(a.copy()) == BIT_inversion(a.copy())
+    bubble_swap = bubble(a.copy())
+    assert bubble_swap == BIT_inversion(a.copy())
+    assert bubble_swap == merge_sort_inversion(a.copy())
