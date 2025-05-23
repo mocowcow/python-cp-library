@@ -2,19 +2,23 @@
 
 """
 置換環
-一個陣列 a 按照某種規則排序後的結果為 b。
-求選擇任意 a[i], a[j] 進行交換，使得 a 等於 b 的最小次數。
-
 將 a 中每個元素 x 指向其排序後的正確位置 (x 在 b 中位置)，會形成若干個環。
 若元素已在正確位置，則自成一環。
+
+---
+
+一個陣列 a 按照某種規則排序後的結果為 b。
+求選擇任意 a[i], a[j] 進行交換，使得 a 等於 b 的最小次數。
 
 交換只會發生在環內。
 每次交換，將元素放到正確位置後，環的大小會減 1。
 
 對於大小為 sz 的環，交換 sz - 1 次後會把最後一個元素也移到正確位置上。
 若陣列中存在 cnt 個環，則需交換 N - cnt 次。
+可用模擬、dfs、併查集找環。
 
 """
+
 
 # https://www.geeksforgeeks.org/minimum-number-swaps-required-sort-array/
 # LC 2471 https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/
@@ -105,3 +109,94 @@ def union_find_component(a):
     for i, x in enumerate(a):
         uf.union(i, mp_b[x])
     return N - uf.component_cnt
+
+
+"""
+逆序對 (Inversion)
+若陣列 a 存在正整數 i, j 滿足 i < j 且 a[i] > a[j]，則稱 (i, j) 為逆序對。
+
+---
+
+一個陣列 a 按照某種規則排序後的結果為 b。
+求選擇相鄰的兩個元素 a[i], a[i+1] 交換，使得 a 等於 b 的最小次數。
+
+交換相鄰元素排序，實際上就是泡沫排序 (bubble sort)。
+泡沫排序每次比較相鄰的數對 a[i], a[i+1]，只要逆序就交換，每次交換逆序對數減 1。
+
+所需交換次數即為逆序對總數。
+可用離散化 + BIT 、線段樹或 merge sort 求逆序對。
+
+"""
+
+
+# UVa 10810 https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1751
+
+
+def BIT_inversion(a):
+    class BIT:
+        """
+        tree[0]代表空區間，不可存值，基本情況下只有[1, n-1]可以存值。
+        offset為索引偏移量，若設置為1時正好可以對應普通陣列的索引操作。
+        """
+
+        def __init__(self, n, offset=1):
+            self.offset = offset
+            self.tree = [0]*(n+offset)
+
+        def update(self, pos, val):
+            """
+            將tree[pos]增加val
+            """
+            i = pos+self.offset
+            while i < len(self.tree):
+                self.tree[i] += val
+                i += i & (-i)
+
+        def query(self, pos):
+            """
+            查詢[1, pos]的前綴和
+            """
+            i = pos+self.offset
+            res = 0
+            while i > 0:
+                res += self.tree[i]
+                i -= i & (-i)
+            return res
+
+        def query_range(self, i, j):
+            """
+            查詢[i, j]的前綴和
+            """
+            return self.query(j)-self.query(i-1)
+
+    N = len(a)
+    # 離散化
+    b = sorted(a)
+    mp = {x: i for i, x in enumerate(b)}
+    for i in range(N):
+        a[i] = mp[a[i]]
+
+    bit = BIT(N)
+    cnt = 0
+    for i, x in enumerate(a):
+        cnt += bit.query_range(x+1, N-1)  # 左方比 x 大的元素個數
+        bit.update(x, 1)
+    return cnt
+
+
+# test bubble sort vs inversions
+def bubble(a):
+    N = len(a)
+    cnt = 0
+    for _ in range(N):
+        for i in range(1, N):
+            if a[i-1] > a[i]:
+                a[i-1], a[i] = a[i], a[i-1]
+                cnt += 1
+    return cnt
+
+a = list(range(100))
+for _ in range(1000):
+    import random
+    random.shuffle(a)
+    assert bubble(a.copy()) == BIT_inversion(a.copy())
