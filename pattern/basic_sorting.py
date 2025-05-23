@@ -8,9 +8,8 @@ def swap(nums, a, b):
 def selection(src):
     # 選擇排序法
     # 找到後方最小元素與i交換
-    print('selection sort')
-    print('origin=', src)
-    a = src[:]
+    # print('selection sort')
+    # print('origin=', src)
     N = len(a)
     for i in range(N):
         mn = i
@@ -18,16 +17,15 @@ def selection(src):
             if a[j] < a[mn]:
                 mn = j
         swap(a, i, mn)
-        print(a)
+        # print(a)
     return a
 
 
 def bubble(src):
     # 泡沫排序法
     # 將較大的元素不斷右移
-    print('bubble sort')
-    print('origin=', src)
-    a = src[:]
+    # print('bubble sort')
+    # print('origin=', src)
     N = len(a)
     for i in range(N):
         for j in range(1, N-i):
@@ -39,9 +37,8 @@ def bubble(src):
 def insertion(src):
     # 插入排序法
     # 將當前元素插入左方有序部分
-    print('insertion sort')
-    print('origin=', src)
-    a = src[:]
+    # print('insertion sort')
+    # print('origin=', src)
     N = len(a)
     for i in range(1, N):
         val = a[i]
@@ -50,15 +47,14 @@ def insertion(src):
             a[j+1] = a[j]
             j -= 1
         a[j+1] = val
-        print(a)
+        # print(a)
 
     return a
 
 
 def quick(src):
-    print('quick sort')
-    print('origin=', src)
-    a = src[:]
+    # print('quick sort')
+    # print('origin=', src)
     N = len(a)
 
     def partition(nums, left, right):
@@ -86,9 +82,34 @@ def quick(src):
     return a
 
 
-src = [5555, 456, 8, 7, 3, 21, 5, 6, 0, -5, 8, 56, 777, 88]
-src = [3, 2, 1, 0, -1]
-# assert sorted(src) == selection(src)
-# assert sorted(src) == bubble(src)
-# assert sorted(src) == insertion(src)
-# assert sorted(src) == quick(src)
+def merge(src):
+
+    def f(a):
+        N = len(a)
+        if N == 1:
+            return a
+        M = N // 2
+        L, R = f(a[:M]), f(a[M:])
+        res = []
+        i = j = 0
+        while i < len(L) and j < len(R):
+            if L[i] <= R[j]:
+                res.append(L[i])
+                i += 1
+            else:
+                res.append(R[j])
+                j += 1
+        res.extend(L[i:])
+        res.extend(R[j:])
+        return res
+
+    return f(src)
+
+
+a = list(range(100))
+for _ in range(1000):
+    import random
+    random.shuffle(a)
+    b = sorted(a)
+    for sort_func in [selection, bubble, insertion, quick, merge]:
+        assert sort_func(a.copy()) == b
