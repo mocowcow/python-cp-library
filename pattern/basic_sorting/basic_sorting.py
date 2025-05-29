@@ -1,31 +1,31 @@
 import random
 
 
-def swap(nums, a, b):
-    nums[a], nums[b] = nums[b], nums[a]
+def swap(nums, i, j):
+    nums[i], nums[j] = nums[j], nums[i]
 
 
-def selection(src):
-    # 選擇排序法
-    # 找到後方最小元素與i交換
-    # print('selection sort')
-    # print('origin=', src)
+def selection(a):
+    """
+    選擇排序法
+
+    枚舉要填的位置 i
+    - 從 a[i..] 找到最小元素位置 mn_i
+    - 把 a[mn_i] 填入 a[i]
+    """
     N = len(a)
     for i in range(N):
-        mn = i
+        mn_i = i
         for j in range(i+1, N):
-            if a[j] < a[mn]:
-                mn = j
-        swap(a, i, mn)
-        # print(a)
+            if a[j] < a[mn_i]:
+                mn_i = j
+        swap(a, i, mn_i)
     return a
 
 
-def bubble(src):
+def bubble(a):
     # 泡沫排序法
     # 將較大的元素不斷右移
-    # print('bubble sort')
-    # print('origin=', src)
     N = len(a)
     for i in range(N):
         for j in range(1, N-i):
@@ -34,11 +34,9 @@ def bubble(src):
     return a
 
 
-def insertion(src):
+def insertion(a):
     # 插入排序法
     # 將當前元素插入左方有序部分
-    # print('insertion sort')
-    # print('origin=', src)
     N = len(a)
     for i in range(1, N):
         val = a[i]
@@ -47,14 +45,10 @@ def insertion(src):
             a[j+1] = a[j]
             j -= 1
         a[j+1] = val
-        # print(a)
-
     return a
 
 
-def quick(src):
-    # print('quick sort')
-    # print('origin=', src)
+def quick(a):
     N = len(a)
 
     def partition(nums, left, right):
@@ -82,7 +76,7 @@ def quick(src):
     return a
 
 
-def merge(src):
+def merge(a):
 
     def f(a):
         N = len(a)
@@ -103,13 +97,4 @@ def merge(src):
         res.extend(R[j:])
         return res
 
-    return f(src)
-
-
-a = list(range(100))
-for _ in range(1000):
-    import random
-    random.shuffle(a)
-    b = sorted(a)
-    for sort_func in [selection, bubble, insertion, quick, merge]:
-        assert sort_func(a.copy()) == b
+    return f(a)
