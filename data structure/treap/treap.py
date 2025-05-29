@@ -1,6 +1,5 @@
 import random
 import time
-from typing import Optional
 
 
 class TreapNode:
@@ -50,11 +49,11 @@ class Treap:
             o.key_cnt += 1
         elif key < o.key:
             o.left = self._add(o.left, key)
-            if o.left.priority > o.priority:  # type: ignore
+            if o.left.priority > o.priority:
                 o = self._rotate_right(o)
         else:
             o.right = self._add(o.right, key)
-            if o.right.priority > o.priority:  # type: ignore
+            if o.right.priority > o.priority:
                 o = self._rotate_left(o)
         self._maintain(o)
         return o
