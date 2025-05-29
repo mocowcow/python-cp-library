@@ -101,3 +101,31 @@ class Treap:
         while o.right:
             o = o.right
         return o.key
+
+    def _lower_bound_index(self, o, x):
+        if not o:
+            return 0
+        if x <= o.key:
+            return self._lower_bound_index(o.left, x)
+        else:
+            left_size = 0
+            if o.left:
+                left_size += o.left.size
+            return left_size + o.key_cnt + self._lower_bound_index(o.right, x)
+
+    def lower_bound_index(self, x):
+        return self._lower_bound_index(self.root, x)
+
+    def _upper_bound_index(self, o, x):
+        if not o:
+            return 0
+        if x < o.key:
+            return self._upper_bound_index(o.left, x)
+        else:
+            left_size = 0
+            if o.left:
+                left_size += o.left.size
+            return left_size + o.key_cnt + self._upper_bound_index(o.right, x)
+
+    def upper_bound_index(self, x):
+        return self._upper_bound_index(self.root, x)
