@@ -54,59 +54,81 @@ def insertion(a):
         val = a[i]
         j = i  # val 目前預定要放到 a[j]
         while j > 0 and a[j-1] > val:  # 若 a[j-1] 比 val 大，則 val 更應該放 a[j-1]
-            a[j] = a[j-1]  # 原有的元素像右移，讓出空位給 val
+            a[j] = a[j-1]  # a[j] 原有的元素右移，讓出空位給 val
             j -= 1
         a[j] = val
     return a
 
 
 def quick(a):
+    """
+    快速排序法 O(N log N)
+
+    基於分治思想。
+    - 選擇隨機值 pivot，將陣列 a 劃分成兩塊
+        - 小於 pivot 放到左半
+        - 大於等於 pivot 放到右半
+    - 遞迴處理左半和右半
+
+    退出遞迴後，左右半都已經排序。且劃分時就保證左半的值都小於等於右半，故 a 已經完成排序。
+    """
     N = len(a)
 
-    def partition(nums, left, right):
-        idx = random.randint(left, right)
-        pivot = nums[idx]
-        # move pivot to right most
-        swap(nums, idx, right)
-        # partition
+    def _partition(left, right):
+        idx = random.randint(left, right)  # 隨機選一個位置當樞紐
+        pivot = a[idx]  # 劃分樞紐值
+
+        # 先把 pivot 丟到最右邊
+        swap(a, idx, right)
+        # 開始劃分
         i = left
         for j in range(left, right):
-            if nums[j] < pivot:
-                swap(nums, i, j)
+            if a[j] < pivot:
+                swap(a, i, j)
                 i += 1
-        # move pivot to middle
-        swap(nums, i, right)
-        return i
+        # 把 pivot 換回中間
+        swap(a, i, right)
+        return i  # 回傳 pivot 所在位置
 
-    def qs(nums, left, right):
+    def _qs(left, right):
         if left < right:
-            idx = partition(nums, left, right)
-            qs(nums, left, idx-1)
-            qs(nums, idx+1, right)
+            idx = _partition(left, right)
+            _qs(left, idx-1)  # 左半邊都小於 pivot
+            _qs(idx+1, right)  # 右半邊都大於等於 pivot
 
-    qs(a, 0, N-1)
+    _qs(0, N-1)
     return a
 
 
 def merge(a):
+    """
+    合併排序法 O(N log N)
 
-    def f(a):
-        N = len(a)
+    基於分治思想。
+    - 將陣列 a 正好切兩半
+    - 遞迴排序左半、右半
+    - 兩右半都有序，只需進行簡單的合併
+    """
+
+    def _ms(sub):
+        N = len(sub)
         if N == 1:
-            return a
+            return sub
+        # 劃分成兩半，分別排序
         M = N // 2
-        L, R = f(a[:M]), f(a[M:])
+        sub_left, sub_right = _ms(sub[:M]), _ms(sub[M:])
+        # 合併左右半
         res = []
         i = j = 0
-        while i < len(L) and j < len(R):
-            if L[i] <= R[j]:
-                res.append(L[i])
+        while i < len(sub_left) and j < len(sub_right):
+            if sub_left[i] <= sub_right[j]:
+                res.append(sub_left[i])
                 i += 1
             else:
-                res.append(R[j])
+                res.append(sub_right[j])
                 j += 1
-        res.extend(L[i:])
-        res.extend(R[j:])
+        res.extend(sub_left[i:])
+        res.extend(sub_right[j:])
         return res
 
-    return f(a)
+    return _ms(a)
