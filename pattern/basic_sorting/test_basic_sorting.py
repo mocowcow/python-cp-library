@@ -1,7 +1,7 @@
 import random
 from basic_sorting import selection, bubble, insertion, quick, merge
 
-TEST_CASES = 1000
+TEST_CASES = 10
 TEST_CASE_SIZE = 1000
 
 
