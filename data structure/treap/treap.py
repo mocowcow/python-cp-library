@@ -129,3 +129,19 @@ class Treap:
 
     def upper_bound_index(self, x):
         return self._upper_bound_index(self.root, x)
+
+    def _k_th(self, o, k):
+        if not o or k < 0 or k >= o.size:
+            return 0
+        left_size = 0
+        if o.left:
+            left_size += o.left.size
+        if k < left_size:
+            return self._k_th(o.left, k)
+        elif k < left_size+o.key_cnt:
+            return o.key
+        else:
+            return self._k_th(o.right, k-left_size-o.key_cnt)
+
+    def k_th(self, k):
+        return self._k_th(self.root, k)
