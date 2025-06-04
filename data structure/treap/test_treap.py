@@ -42,4 +42,4 @@ def test_k_th():
     sl, tree = build()
     for _ in range(TEST_CASES):
         i = random.randint(0, len(sl)-1)
-        assert sl[i] == tree.k_th(i)
+        assert sl[i] == tree.k_th(i).key

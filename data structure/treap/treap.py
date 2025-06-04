@@ -145,7 +145,7 @@ class Treap:
         if k < left_size:
             return self._k_th(o.left, k)
         elif k < left_size+o.key_cnt:
-            return o.key
+            return o
         else:
             return self._k_th(o.right, k-left_size-o.key_cnt)
 
