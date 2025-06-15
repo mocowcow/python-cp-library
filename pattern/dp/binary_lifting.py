@@ -61,7 +61,7 @@ N 個點，最大跳躍次數 K。
 # LC 1483 (跳 k 次) https://leetcode.com/problems/kth-ancestor-of-a-tree-node/
 # LC 2836 (跳 k 次成本) https://leetcode.com/problems/maximize-value-of-function-in-a-ball-passing-game/
 # LC 3534 (最少跳幾次) https://leetcode.com/problems/path-existence-queries-in-a-graph-ii/
-
+# LC 3585 (lca 轉彎跳 k 次)https://leetcode.com/problems/find-weighted-median-node-in-tree/
 
 class BinaryLifting:
     def __init__(self, N, parent):
